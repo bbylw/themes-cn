@@ -17,7 +17,7 @@ const description =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#f7f4ed" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:site_name" content="Radix Themes 中文站" />
@@ -38,35 +38,102 @@ const description =
       document.documentElement.classList.add("js");
     </script>
   </head>
-  <body>
-    <!-- ============================ HERO ============================ -->
-    <header class="hero">
-      <div class="wrap hero-top">
-        <span class="brand">Radix Themes</span>
-        <a class="btn" href="#start">开始使用</a>
-      </div>
+  <body id="top">
+    <header class="site-head">
+      <div class="wrap site-head-inner">
+        <a class="brand" href="#top" aria-label="Radix Themes 中文站，回到顶部">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Radix Themes</span>
+          <span class="brand-tag">中文站</span>
+        </a>
 
-      <div class="hero-main">
-        <HeroPlayground client:load />
-        <p class="hero-support reveal" style="--d: 220ms">
-          一个开源 React 组件库，专注快速开发、易维护与无障碍访问。上面三个控件是真的——拖一拖，标题就变了。
-        </p>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="#capabilities"><span>01</span>能力</a>
+          <a href="#start"><span>02</span>安装</a>
+          <a href="#components"><span>03</span>组件</a>
+        </nav>
+
+        <div class="site-head-actions">
+          <a
+            class="text-link"
+            href="https://www.radix-ui.com/themes/docs"
+            target="_blank"
+            rel="noopener"
+          >
+            文档 <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn--sm" href="#ship">开始使用</a>
+        </div>
       </div>
     </header>
 
     <main>
+      <!-- ============================ 首屏 ============================ -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-meta">
+          <p class="kicker">Radix Themes · 中文文档站</p>
+          <p class="hero-version">
+            <span>Open source</span><i>·</i><span>MIT</span><i>·</i><span>v3.3</span>
+          </p>
+        </div>
+
+        <div class="hero-main">
+          <HeroPlayground client:load />
+          <p class="hero-support reveal" style="--d: 220ms">
+            上面三个控件是真的——拖一拖，<strong>标题就变了</strong>。一个开源
+            React 组件库，<span class="nb">专注</span>快速开发、易维护与无障碍访问。
+          </p>
+        </div>
+
+        <div class="wrap hero-foot">
+          <span class="scroll-cue">
+            <span class="line" aria-hidden="true"></span>
+            向下滚动 · 五项能力
+          </span>
+          <span class="hero-foot-note">
+            无需配置<i>·</i>开箱即用<i>·</i>完整中文
+          </span>
+        </div>
+      </section>
+
       <!-- ====================== 能力横带 ====================== -->
-      <section aria-label="核心能力" data-reveal>
+      <section id="capabilities" aria-labelledby="cap-title">
+        <div class="wrap sec-head reveal">
+          <div class="sec-top">
+            <p class="sec-meta"><span class="sec-no">01</span>Capabilities</p>
+            <p class="sec-note">五个开关 · 五个真实的取舍</p>
+          </div>
+          <h2 class="sec-title" id="cap-title">
+            默认就很好，<span class="dim">改也容易。</span>
+          </h2>
+        </div>
+
         <FeatureBands client:visible />
       </section>
 
       <!-- ====================== 安装四场 ====================== -->
-      <section id="start" aria-label="安装步骤" data-reveal>
+      <section class="install" id="start" aria-labelledby="start-title">
+        <div class="wrap sec-head reveal">
+          <div class="sec-top">
+            <p class="sec-meta"><span class="sec-no">02</span>Getting started</p>
+            <p class="sec-note">约 3 分钟 · bun / npm / yarn / pnpm</p>
+          </div>
+          <h2 class="sec-title" id="start-title">
+            四步上手，<span class="dim">然后忘了样式。</span>
+          </h2>
+        </div>
+
         <div class="fields">
           <div class="field f1" data-ui>
-            <p class="field-heading reveal">四步上手</p>
+            <div class="field-top">
+              <span class="field-no">01</span><span>Install · 安装</span>
+            </div>
             <div class="install-card reveal" data-ui>
-              <div class="bar"><span>终端</span></div>
+              <div class="bar">
+                <span class="bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="bar-title">terminal</span>
+                <span class="bar-flag">zsh</span>
+              </div>
               <pre><span class="tk-cm"># 同样支持 npm / yarn / pnpm</span>
 bun add @radix-ui/themes</pre>
             </div>
@@ -74,30 +141,53 @@ bun add @radix-ui/themes</pre>
           </div>
 
           <div class="field f2" data-ui>
+            <div class="field-top">
+              <span class="field-no">02</span><span>Import · 引入</span>
+            </div>
             <div class="install-card reveal" style="--d: 90ms" data-ui>
-              <div class="bar"><span>入口文件</span></div>
-              <pre><span class="tk-kw">import</span> <span class="tk-str">"@radix-ui/themes/styles.css"</span>;</pre>
+              <div class="bar">
+                <span class="bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="bar-title">main.tsx</span>
+                <span class="bar-flag">ts</span>
+              </div>
+              <pre><span class="tk-kw">import</span>
+<span class="tk-str">"@radix-ui/themes/styles.css"</span>;</pre>
             </div>
             <p class="clause reveal" style="--d: 210ms">然后，导入样式。</p>
           </div>
 
           <div class="field f3" data-ui>
+            <div class="field-top">
+              <span class="field-no">03</span><span>Provider · 主题</span>
+            </div>
             <div class="install-card reveal" style="--d: 180ms" data-ui>
-              <div class="bar"><span>根组件</span></div>
-              <pre><span class="tk-kw">import</span> &#123; Theme &#125; <span class="tk-kw">from</span> <span class="tk-str">"@radix-ui/themes"</span>;
+              <div class="bar">
+                <span class="bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="bar-title">App.tsx</span>
+                <span class="bar-flag">tsx</span>
+              </div>
+              <pre><span class="tk-kw">import</span> &#123; Theme &#125;
+  <span class="tk-kw">from</span> <span class="tk-str">"@radix-ui/themes"</span>;
 
 &lt;<span class="tk-tag">Theme</span> <span class="tk-kw">accentColor</span>=<span class="tk-str">"blue"</span>&gt;
   &lt;<span class="tk-tag">App</span> /&gt;
 &lt;/<span class="tk-tag">Theme</span>&gt;</pre>
             </div>
-            <p class="clause reveal" style="--d: 300ms">接着，添加主题。</p>
+            <p class="clause reveal" style="--d: 300ms">接着，包一层 Theme。</p>
           </div>
 
           <div class="field f4" data-ui>
+            <div class="field-top">
+              <span class="field-no">04</span><span>Render · 渲染</span>
+            </div>
             <div class="install-card reveal" style="--d: 270ms" data-ui>
-              <div class="bar"><span>页面</span></div>
+              <div class="bar">
+                <span class="bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="bar-title">preview</span>
+                <span class="bar-flag">html</span>
+              </div>
               <div class="ui">
-                <strong style="font-size: 14px">你好，Radix Themes :)</strong>
+                <strong>你好，Radix Themes :)</strong>
                 <button class="demo-btn" type="button">出发</button>
               </div>
             </div>
@@ -107,53 +197,117 @@ bun add @radix-ui/themes</pre>
       </section>
 
       <!-- ====================== 组件台面 ====================== -->
-      <section aria-label="组件演示" data-reveal>
-        <div class="wrap stage-sec">
+      <section class="components" id="components" aria-labelledby="comp-title">
+        <div class="wrap sec-head reveal">
+          <div class="sec-top">
+            <p class="sec-meta"><span class="sec-no">03</span>Components</p>
+            <p class="sec-note">点击切换 · 真实渲染 · 键盘可达</p>
+          </div>
+          <h2 class="sec-title" id="comp-title">
+            组件，<span class="dim">就是页面本身。</span>
+          </h2>
+        </div>
+
+        <div class="wrap stage-sec reveal">
           <ComponentStage client:visible />
         </div>
       </section>
 
-      <!-- ====================== 一句话收尾 ====================== -->
-      <section class="cta wrap" aria-label="开始使用" data-reveal>
-        <form
-          class="cta-form"
-          action="https://www.radix-ui.com/themes/docs/overview/getting-started"
-          method="get"
-          target="_blank"
-        >
-          <p class="cta-sentence reveal">
-            把
-            <input
-              class="cta-input"
-              type="text"
-              name="q"
-              placeholder="你的项目"
-              aria-label="你的项目名"
-            />
-            交给 Radix Themes。
-            <button class="cta-btn" type="submit">开始</button>
+      <!-- ====================== 开始使用 ====================== -->
+      <section class="ship" id="ship" aria-labelledby="ship-title">
+        <span class="ship-mark" aria-hidden="true">Radix</span>
+        <div class="wrap ship-inner">
+          <div class="ship-top">
+            <p class="ship-meta"><span class="ship-no">04</span>Ship it</p>
+            <p class="ship-note">无需设计稿，从第一行代码开始</p>
+          </div>
+
+          <form
+            class="ship-form reveal"
+            action="https://www.radix-ui.com/themes/docs/overview/getting-started"
+            method="get"
+            target="_blank"
+          >
+            <div class="ship-line">
+              <h2 class="ship-title" id="ship-title">
+                把
+                <input
+                  class="cta-input"
+                  type="text"
+                  name="q"
+                  placeholder="你的项目"
+                  aria-label="你的项目名"
+                />
+                <br />
+                交给 <span class="ship-brand">Radix Themes。</span>
+              </h2>
+              <button
+                class="cta-btn"
+                type="submit"
+                aria-label="开始使用，前往官方快速上手指南"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </form>
+
+          <p class="ship-hint reveal" style="--d: 140ms">
+            <span aria-hidden="true">↳</span>
+            回车或点击箭头，前往官方快速上手指南
           </p>
-        </form>
-        <p class="cta-note reveal" style="--d: 120ms">
-          回车或点击「开始」，前往官方快速上手指南。
-        </p>
+        </div>
       </section>
     </main>
 
     <!-- ============================ 页脚 ============================ -->
-    <footer class="footer wrap" data-reveal>
-      <div class="footer-line reveal">
-        <span class="desc">本站为社区维护的中文站点</span>
-        <nav aria-label="页脚导航">
-          <a href="https://www.radix-ui.com/themes/docs" target="_blank" rel="noopener">文档</a>
-          <a href="https://www.radix-ui.com/themes/docs/overview/getting-started" target="_blank" rel="noopener">上手</a>
-          <a href="https://github.com/radix-ui/themes" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://discord.com/invite/7Xb99uG" target="_blank" rel="noopener">Discord</a>
-        </nav>
-        <span class="legal">
-          © 2026 WorkOS ·
-          <a href="https://github.com/radix-ui/themes/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a>
-        </span>
+    <footer class="site-foot">
+      <div class="wrap foot-grid">
+        <div class="foot-brand reveal">
+          <a class="brand" href="#top" aria-label="Radix Themes 中文站，回到顶部">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-name">Radix Themes</span>
+          </a>
+          <p class="foot-desc">
+            写组件，不必写样式。本站为社区维护的中文站点，内容对照 Radix
+            Themes 官方文档。
+          </p>
+        </div>
+
+        <div class="reveal" style="--d: 60ms">
+          <p class="foot-col-title">站点</p>
+          <nav class="foot-links" aria-label="站点导航">
+            <a href="#capabilities">核心能力</a>
+            <a href="#start">安装指南</a>
+            <a href="#components">组件演示</a>
+          </nav>
+        </div>
+
+        <div class="reveal" style="--d: 120ms">
+          <p class="foot-col-title">资源</p>
+          <nav class="foot-links" aria-label="外部资源">
+            <a href="https://www.radix-ui.com/themes/docs" target="_blank" rel="noopener">官方文档 ↗</a>
+            <a href="https://www.radix-ui.com/themes/docs/overview/getting-started" target="_blank" rel="noopener">快速上手 ↗</a>
+            <a href="https://github.com/radix-ui/themes" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://discord.com/invite/7Xb99uG" target="_blank" rel="noopener">Discord ↗</a>
+          </nav>
+        </div>
+
+        <div class="foot-legal reveal" style="--d: 180ms">
+          <p>© 2026 WorkOS</p>
+          <p>
+            <a
+              href="https://github.com/radix-ui/themes/blob/main/LICENSE"
+              target="_blank"
+              rel="noopener">MIT License ↗</a
+            >
+          </p>
+          <p>社区维护 · 非官方</p>
+        </div>
+      </div>
+
+      <div class="wrap foot-base">
+        <p>Radix Themes · 中文站</p>
+        <a href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
       </div>
     </footer>
 
@@ -167,11 +321,9 @@ bun add @radix-ui/themes</pre>
             }
           }
         },
-        { threshold: 0.15 }
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
       );
-      document
-        .querySelectorAll("[data-reveal], .reveal")
-        .forEach((el) => io.observe(el));
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     </script>
   </body>
 </html>

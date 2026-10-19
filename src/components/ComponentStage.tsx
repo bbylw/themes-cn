@@ -19,154 +19,239 @@ import LabeledSlider from "./LabeledSlider";
 
 type Output = "card" | "table" | "callout";
 
-const NAMES: { id: Output; label: string }[] = [
-  { id: "card", label: "卡片" },
-  { id: "table", label: "表格" },
-  { id: "callout", label: "通知" },
+const NAMES: { id: Output; label: string; en: string }[] = [
+  { id: "card", label: "卡片", en: "Card" },
+  { id: "table", label: "表格", en: "Table" },
+  { id: "callout", label: "通知", en: "Callout" },
 ];
 
 export default function ComponentStage() {
   const [sel, setSel] = useState<Output>("card");
+  const current = NAMES.find((n) => n.id === sel) ?? NAMES[0];
 
   return (
     <>
-      <div className="stage-names" role="group" aria-label="选择一个组件">
-        {NAMES.map((n) => (
-          <button
-            key={n.id}
-            type="button"
-            aria-pressed={sel === n.id}
-            onClick={() => setSel(n.id)}
-          >
-            {n.label}
-          </button>
-        ))}
+      <div className="stage-names">
+        <div className="stage-tabs" role="group" aria-label="选择一个组件">
+          {NAMES.map((n, i) => (
+            <button
+              key={n.id}
+              type="button"
+              aria-pressed={sel === n.id}
+              onClick={() => setSel(n.id)}
+            >
+              <span className="tab-no" aria-hidden="true">
+                0{i + 1}
+              </span>
+              <span className="tab-name">{n.label}</span>
+              <span className="tab-en" aria-hidden="true">
+                {n.en}
+              </span>
+              <span className="tab-arrow" aria-hidden="true">
+                →
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <p className="stage-caption">
+          左侧切换组件，右侧是同一块画布。示例全部由 Radix Themes 实时渲染。
+        </p>
+
+        <a
+          className="stage-link"
+          href="https://www.radix-ui.com/themes/docs/components/overview"
+          target="_blank"
+          rel="noopener"
+        >
+          浏览全部组件 <span aria-hidden="true">↗</span>
+        </a>
       </div>
 
       <div className="stage">
-        <div className="sheet" data-ui>
-          <Theme
-            key={sel}
-            accentColor="blue"
-            grayColor="gray"
-            radius="medium"
-            hasBackground={false}
-          >
-            {sel === "card" && (
-              <Card size="3">
-                <Flex direction="column" gap="4">
-                  <Flex gap="3" align="center">
-                    <Avatar fallback="RT" radius="full" size="3" />
-                    <Box flexGrow="1">
-                      <Heading as="h2" size="1">组件演示</Heading>
-                      <Text as="div" size="1" color="gray">
-                        真实组件 · 可交互
+        <div className="stage-bar" aria-hidden="true">
+          <span className="stage-bar-left">
+            <span className="live-dot" />
+            Live preview
+          </span>
+          <span>Radix Themes · 3.3</span>
+        </div>
+
+        <div className="stage-canvas">
+          <div className="sheet" data-ui>
+            <div className="sheet-bar" aria-hidden="true">
+              <span className="sheet-dots">
+                <i></i>
+                <i></i>
+                <i></i>
+              </span>
+              <span className="sheet-title">
+                {current.en} · {current.label}
+              </span>
+              <span className="sheet-badge">Live</span>
+            </div>
+
+            <div className="sheet-body">
+              <Theme
+                key={sel}
+                accentColor="indigo"
+                grayColor="sand"
+                radius="medium"
+                hasBackground={false}
+              >
+                {sel === "card" && (
+                  <Card size="3">
+                    <Flex direction="column" gap="4">
+                      <Flex gap="3" align="center">
+                        <Avatar fallback="RT" radius="full" size="3" />
+                        <Box flexGrow="1">
+                          <Heading as="h2" size="1">
+                            组件演示
+                          </Heading>
+                          <Text as="div" size="1" color="gray">
+                            真实组件 · 可交互
+                          </Text>
+                        </Box>
+                        <Badge color="blue" highContrast>
+                          稳定
+                        </Badge>
+                      </Flex>
+
+                      <Text size="1" color="gray">
+                        这段界面由 @radix-ui/themes 渲染，样式开箱即用。
                       </Text>
-                    </Box>
-                    <Badge color="blue" highContrast>稳定</Badge>
+
+                      <Flex gap="2" wrap="wrap">
+                        <Button size="1" variant="soft">
+                          主要操作
+                        </Button>
+                        <Button size="1" variant="soft" color="gray">
+                          次要操作
+                        </Button>
+                      </Flex>
+
+                      <Flex gap="3" align="center">
+                        <Switch defaultChecked aria-label="启用实时预览" />
+                        <Text size="1">启用实时预览</Text>
+                      </Flex>
+
+                      <Flex direction="column" gap="1">
+                        <Flex justify="between" align="center">
+                          <Text size="1" color="gray">
+                            预览强度
+                          </Text>
+                          <Text size="1" color="gray">
+                            60
+                          </Text>
+                        </Flex>
+                        <LabeledSlider label="预览强度" defaultValue={[60]} />
+                      </Flex>
+
+                      <Flex direction="column" gap="1">
+                        <Flex justify="between" align="center">
+                          <Text size="1" color="gray">
+                            构建进度
+                          </Text>
+                          <Text size="1" color="gray">
+                            72%
+                          </Text>
+                        </Flex>
+                        <Progress value={72} aria-label="构建进度" />
+                      </Flex>
+                    </Flex>
+                  </Card>
+                )}
+
+                {sel === "table" && (
+                  <Table.Root size="1">
+                    <Table.Header>
+                      <Table.Row>
+                        <Table.ColumnHeaderCell>组件</Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell>类别</Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell>一句话</Table.ColumnHeaderCell>
+                      </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                      <Table.Row>
+                        <Table.Cell>
+                          <Text size="1" weight="medium">
+                            Button
+                          </Text>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Badge color="blue" highContrast>
+                            基础
+                          </Badge>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Text size="1">触发操作的主要控件。</Text>
+                        </Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>
+                          <Text size="1" weight="medium">
+                            Flex
+                          </Text>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Badge color="cyan" highContrast>
+                            布局
+                          </Badge>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Text size="1">一维弹性盒布局原语。</Text>
+                        </Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>
+                          <Text size="1" weight="medium">
+                            Dialog
+                          </Text>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Badge color="purple" highContrast>
+                            浮层
+                          </Badge>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Text size="1">模态对话框，聚焦当前任务。</Text>
+                        </Table.Cell>
+                      </Table.Row>
+                    </Table.Body>
+                  </Table.Root>
+                )}
+
+                {sel === "callout" && (
+                  <Flex direction="column" gap="3">
+                    <Callout.Root color="blue" highContrast>
+                      <Callout.Icon>
+                        <InfoCircledIcon />
+                      </Callout.Icon>
+                      <Callout.Text size="1">
+                        已启用实时预览，样式随主题变化。
+                      </Callout.Text>
+                    </Callout.Root>
+                    <Callout.Root color="green" highContrast>
+                      <Callout.Icon>
+                        <InfoCircledIcon />
+                      </Callout.Icon>
+                      <Callout.Text size="1">
+                        构建成功，用时 2.4 秒。
+                      </Callout.Text>
+                    </Callout.Root>
+                    <Callout.Root color="orange" variant="soft" highContrast>
+                      <Callout.Icon>
+                        <InfoCircledIcon />
+                      </Callout.Icon>
+                      <Callout.Text size="1">
+                        提示：appearance 属性切换暗色模式。
+                      </Callout.Text>
+                    </Callout.Root>
                   </Flex>
-
-                  <Text size="1" color="gray">
-                    这段界面由 @radix-ui/themes 渲染，样式开箱即用。
-                  </Text>
-
-                  <Flex gap="3" wrap="wrap">
-                    <Button size="1" variant="soft">
-                      主要操作
-                    </Button>
-                    <Button size="1" variant="soft" color="gray">
-                      次要操作
-                    </Button>
-                  </Flex>
-
-                  <Flex gap="3" align="center">
-                    <Switch defaultChecked aria-label="启用实时预览" />
-                    <Text size="1">启用实时预览</Text>
-                  </Flex>
-
-                  <LabeledSlider label="预览强度" defaultValue={[60]} />
-
-                  <Progress value={72} aria-label="构建进度" />
-                </Flex>
-              </Card>
-            )}
-
-            {sel === "table" && (
-              <Table.Root size="1">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.ColumnHeaderCell>组件</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>类别</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>一句话</Table.ColumnHeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  <Table.Row>
-                    <Table.Cell>
-                      <Text size="1" weight="medium">Button</Text>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Badge color="blue" highContrast>基础</Badge>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Text size="1">触发操作的主要控件。</Text>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      <Text size="1" weight="medium">Flex</Text>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Badge color="cyan" highContrast>布局</Badge>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Text size="1">一维弹性盒布局原语。</Text>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      <Text size="1" weight="medium">Dialog</Text>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Badge color="purple" highContrast>浮层</Badge>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Text size="1">模态对话框，聚焦当前任务。</Text>
-                    </Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              </Table.Root>
-            )}
-
-            {sel === "callout" && (
-              <Flex direction="column" gap="3">
-                <Callout.Root color="blue" highContrast>
-                  <Callout.Icon>
-                    <InfoCircledIcon />
-                  </Callout.Icon>
-                  <Callout.Text size="1">
-                    已启用实时预览，样式随主题变化。
-                  </Callout.Text>
-                </Callout.Root>
-                <Callout.Root color="green" highContrast>
-                  <Callout.Icon>
-                    <InfoCircledIcon />
-                  </Callout.Icon>
-                  <Callout.Text size="1">
-                    构建成功，用时 2.4 秒。
-                  </Callout.Text>
-                </Callout.Root>
-                <Callout.Root color="orange" variant="soft" highContrast>
-                  <Callout.Icon>
-                    <InfoCircledIcon />
-                  </Callout.Icon>
-                  <Callout.Text size="1">
-                    提示：appearance 属性切换暗色模式。
-                  </Callout.Text>
-                </Callout.Root>
-              </Flex>
-            )}
-          </Theme>
+                )}
+              </Theme>
+            </div>
+          </div>
         </div>
       </div>
     </>
