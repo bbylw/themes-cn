@@ -1,0 +1,166 @@
+---
+import "@radix-ui/themes/styles.css";
+import "../styles/global.css";
+import HeroPlayground from "../components/HeroPlayground.tsx";
+import FeatureBands from "../components/FeatureBands.tsx";
+import ComponentStage from "../components/ComponentStage.tsx";
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Radix Themes 中文站 — 写组件，不必写样式</title>
+    <meta
+      name="description"
+      content="Radix Themes 是一个开源 React 组件库，专注快速开发、易维护与无障碍访问。预置样式，开箱即用。"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ============================ HERO ============================ -->
+    <header class="hero">
+      <div class="wrap hero-top">
+        <span class="brand">Radix Themes</span>
+        <a class="btn" href="#start">开始使用</a>
+      </div>
+
+      <div class="hero-main">
+        <HeroPlayground client:load />
+        <p class="hero-support reveal" style="--d: 220ms">
+          一个开源 React 组件库，专注快速开发、易维护与无障碍访问。上面三个控件是真的——拖一拖，标题就变了。
+        </p>
+      </div>
+
+      <div class="hero-bottom"></div>
+    </header>
+
+    <main>
+      <!-- ====================== 能力横带 ====================== -->
+      <section aria-label="核心能力" data-reveal>
+        <FeatureBands client:visible />
+      </section>
+
+      <!-- ====================== 安装四场 ====================== -->
+      <section id="start" aria-label="安装步骤" data-reveal>
+        <div class="fields">
+          <div class="field f1" data-ui>
+            <p class="field-heading reveal">四步上手</p>
+            <div class="install-card reveal" data-ui>
+              <div class="bar"><span>终端</span></div>
+              <pre><span class="tk-cm"># 同样支持 npm / yarn / pnpm</span>
+bun add @radix-ui/themes</pre>
+            </div>
+            <p class="clause reveal" style="--d: 120ms">首先，安装依赖。</p>
+          </div>
+
+          <div class="field f2" data-ui>
+            <div class="install-card reveal" style="--d: 90ms" data-ui>
+              <div class="bar"><span>入口文件</span></div>
+              <pre><span class="tk-kw">import</span> <span class="tk-str">"@radix-ui/themes/styles.css"</span>;</pre>
+            </div>
+            <p class="clause reveal" style="--d: 210ms">然后，导入样式。</p>
+          </div>
+
+          <div class="field f3" data-ui>
+            <div class="install-card reveal" style="--d: 180ms" data-ui>
+              <div class="bar"><span>根组件</span></div>
+              <pre><span class="tk-kw">import</span> &#123; Theme &#125; <span class="tk-kw">from</span> <span class="tk-str">"@radix-ui/themes"</span>;
+
+&lt;<span class="tk-tag">Theme</span> <span class="tk-kw">accentColor</span>=<span class="tk-str">"blue"</span>&gt;
+  &lt;<span class="tk-tag">App</span> /&gt;
+&lt;/<span class="tk-tag">Theme</span>&gt;</pre>
+            </div>
+            <p class="clause reveal" style="--d: 300ms">接着，添加主题。</p>
+          </div>
+
+          <div class="field f4" data-ui>
+            <div class="install-card reveal" style="--d: 270ms" data-ui>
+              <div class="bar"><span>页面</span></div>
+              <div class="ui">
+                <strong style="font-size: 14px">你好，Radix Themes :)</strong>
+                <button class="demo-btn" type="button">出发</button>
+              </div>
+            </div>
+            <p class="clause reveal" style="--d: 390ms">最后，开始构建。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== 组件台面 ====================== -->
+      <section aria-label="组件演示" data-reveal>
+        <div class="wrap stage-sec">
+          <ComponentStage client:visible />
+        </div>
+      </section>
+
+      <!-- ====================== 一句话收尾 ====================== -->
+      <section class="cta wrap" aria-label="开始使用" data-reveal>
+        <form
+          class="cta-form"
+          action="https://www.radix-ui.com/themes/docs/overview/getting-started"
+          method="get"
+          target="_blank"
+          rel="noopener"
+        >
+          <p class="cta-sentence reveal">
+            把
+            <input
+              class="cta-input"
+              type="text"
+              name="q"
+              placeholder="你的项目"
+              aria-label="你的项目名"
+            />
+            交给 Radix Themes。
+            <button class="cta-btn" type="submit">开始</button>
+          </p>
+        </form>
+        <p class="cta-note reveal" style="--d: 120ms">
+          回车或点击「开始」，前往官方快速上手指南。
+        </p>
+      </section>
+    </main>
+
+    <!-- ============================ 页脚 ============================ -->
+    <footer class="footer wrap" data-reveal>
+      <div class="footer-line reveal">
+        <span class="desc">本站为社区维护的中文站点</span>
+        <nav aria-label="页脚导航">
+          <a href="https://www.radix-ui.com/themes/docs" target="_blank" rel="noopener">文档</a>
+          <a href="https://www.radix-ui.com/themes/docs/overview/getting-started" target="_blank" rel="noopener">上手</a>
+          <a href="https://github.com/radix-ui/themes" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://discord.com/invite/7Xb99uG" target="_blank" rel="noopener">Discord</a>
+        </nav>
+        <span class="legal">
+          © 2026 WorkOS ·
+          <a href="https://github.com/radix-ui/themes/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a>
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+      document
+        .querySelectorAll("[data-reveal], .reveal")
+        .forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
