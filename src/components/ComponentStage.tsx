@@ -9,13 +9,13 @@ import {
   Badge,
   Button,
   Switch,
-  Slider,
   Progress,
   Avatar,
   Table,
   Callout,
 } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
+import LabeledSlider from "./LabeledSlider";
 
 type Output = "card" | "table" | "callout";
 
@@ -57,13 +57,13 @@ export default function ComponentStage() {
                 <Flex direction="column" gap="4">
                   <Flex gap="3" align="center">
                     <Avatar fallback="RT" radius="full" size="3" />
-                    <Box grow="1">
+                    <Box flexGrow="1">
                       <Heading as="h2" size="1">组件演示</Heading>
                       <Text as="div" size="1" color="gray">
                         真实组件 · 可交互
                       </Text>
                     </Box>
-                    <Badge color="blue">稳定</Badge>
+                    <Badge color="blue" highContrast>稳定</Badge>
                   </Flex>
 
                   <Text size="1" color="gray">
@@ -80,13 +80,13 @@ export default function ComponentStage() {
                   </Flex>
 
                   <Flex gap="3" align="center">
-                    <Switch defaultChecked />
+                    <Switch defaultChecked aria-label="启用实时预览" />
                     <Text size="1">启用实时预览</Text>
                   </Flex>
 
-                  <Slider defaultValue={[60]} />
+                  <LabeledSlider label="预览强度" defaultValue={[60]} />
 
-                  <Progress value={72} />
+                  <Progress value={72} aria-label="构建进度" />
                 </Flex>
               </Card>
             )}
@@ -102,37 +102,37 @@ export default function ComponentStage() {
                 </Table.Header>
                 <Table.Body>
                   <Table.Row>
-                    <Table.RowCell>
+                    <Table.Cell>
                       <Text size="1" weight="medium">Button</Text>
-                    </Table.RowCell>
-                    <Table.RowCell>
-                      <Badge color="blue">基础</Badge>
-                    </Table.RowCell>
-                    <Table.RowCell>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Badge color="blue" highContrast>基础</Badge>
+                    </Table.Cell>
+                    <Table.Cell>
                       <Text size="1">触发操作的主要控件。</Text>
-                    </Table.RowCell>
+                    </Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.RowCell>
+                    <Table.Cell>
                       <Text size="1" weight="medium">Flex</Text>
-                    </Table.RowCell>
-                    <Table.RowCell>
-                      <Badge color="cyan">布局</Badge>
-                    </Table.RowCell>
-                    <Table.RowCell>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Badge color="cyan" highContrast>布局</Badge>
+                    </Table.Cell>
+                    <Table.Cell>
                       <Text size="1">一维弹性盒布局原语。</Text>
-                    </Table.RowCell>
+                    </Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.RowCell>
+                    <Table.Cell>
                       <Text size="1" weight="medium">Dialog</Text>
-                    </Table.RowCell>
-                    <Table.RowCell>
-                      <Badge color="purple">浮层</Badge>
-                    </Table.RowCell>
-                    <Table.RowCell>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Badge color="purple" highContrast>浮层</Badge>
+                    </Table.Cell>
+                    <Table.Cell>
                       <Text size="1">模态对话框，聚焦当前任务。</Text>
-                    </Table.RowCell>
+                    </Table.Cell>
                   </Table.Row>
                 </Table.Body>
               </Table.Root>
@@ -140,7 +140,7 @@ export default function ComponentStage() {
 
             {sel === "callout" && (
               <Flex direction="column" gap="3">
-                <Callout.Root color="blue">
+                <Callout.Root color="blue" highContrast>
                   <Callout.Icon>
                     <InfoCircledIcon />
                   </Callout.Icon>
@@ -148,7 +148,7 @@ export default function ComponentStage() {
                     已启用实时预览，样式随主题变化。
                   </Callout.Text>
                 </Callout.Root>
-                <Callout.Root color="green">
+                <Callout.Root color="green" highContrast>
                   <Callout.Icon>
                     <InfoCircledIcon />
                   </Callout.Icon>
@@ -156,7 +156,7 @@ export default function ComponentStage() {
                     构建成功，用时 2.4 秒。
                   </Callout.Text>
                 </Callout.Root>
-                <Callout.Root color="orange" variant="soft">
+                <Callout.Root color="orange" variant="soft" highContrast>
                   <Callout.Icon>
                     <InfoCircledIcon />
                   </Callout.Icon>

@@ -4,6 +4,10 @@ import "../styles/global.css";
 import HeroPlayground from "../components/HeroPlayground.tsx";
 import FeatureBands from "../components/FeatureBands.tsx";
 import ComponentStage from "../components/ComponentStage.tsx";
+
+const title = "Radix Themes 中文站 — 写组件，不必写样式";
+const description =
+  "Radix Themes 是一个开源 React 组件库，专注快速开发、易维护与无障碍访问。预置样式，开箱即用。";
 ---
 
 <!doctype html>
@@ -11,18 +15,28 @@ import ComponentStage from "../components/ComponentStage.tsx";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Radix Themes 中文站 — 写组件，不必写样式</title>
-    <meta
-      name="description"
-      content="Radix Themes 是一个开源 React 组件库，专注快速开发、易维护与无障碍访问。预置样式，开箱即用。"
-    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="Radix Themes 中文站" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/schibsted-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
     <!-- ============================ HERO ============================ -->
@@ -38,8 +52,6 @@ import ComponentStage from "../components/ComponentStage.tsx";
           一个开源 React 组件库，专注快速开发、易维护与无障碍访问。上面三个控件是真的——拖一拖，标题就变了。
         </p>
       </div>
-
-      <div class="hero-bottom"></div>
     </header>
 
     <main>
@@ -108,7 +120,6 @@ bun add @radix-ui/themes</pre>
           action="https://www.radix-ui.com/themes/docs/overview/getting-started"
           method="get"
           target="_blank"
-          rel="noopener"
         >
           <p class="cta-sentence reveal">
             把

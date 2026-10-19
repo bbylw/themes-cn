@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Theme, Slider, Switch, Flex, Text } from "@radix-ui/themes";
+import { Theme, Switch, Flex, Text } from "@radix-ui/themes";
+import LabeledSlider from "./LabeledSlider";
 
 export default function HeroPlayground() {
   const [weight, setWeight] = useState(800);
@@ -33,13 +34,13 @@ export default function HeroPlayground() {
           </Text>
           <span className="readout">{weight}</span>
         </div>
-        <Slider
+        <LabeledSlider
+          label="标题字重"
           value={[weight]}
           onValueChange={(v) => setWeight(v[0])}
           min={400}
           max={900}
           step={100}
-          aria-label="标题字重"
         />
       </div>
 
@@ -50,13 +51,13 @@ export default function HeroPlayground() {
           </Text>
           <span className="readout">{(tracking / 100).toFixed(2)}em</span>
         </div>
-        <Slider
+        <LabeledSlider
+          label="标题字距"
           value={[tracking]}
           onValueChange={(v) => setTracking(v[0])}
           min={-5}
           max={5}
           step={1}
-          aria-label="标题字距"
         />
       </div>
 
